@@ -1,0 +1,19 @@
+version: "2"
+services:
+  tests:
+    image: "golang:1.9.1"
+    links:
+      - "mongo"
+    command: "go test -v ."
+    working_dir: "/go/src/github.com/jimmiebtlr/mgobug"
+    environment:
+      - "PUBSUB_EMULATOR_HOST=pubsub:8042"
+      - "GCLOUD_PROJECT_ID=develop-175606"
+      - "TEST_MONGO_URL=mongodb://mongo:27017"
+    volumes:
+      - "./:/go/src/github.com/jimmiebtlr/mgobug"
+  mongo:
+    entrypoint: [ "/usr/bin/mongod" ]
+    image: mongo:3.2
+    ports:
+      - "27017"
