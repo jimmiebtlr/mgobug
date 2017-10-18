@@ -5,6 +5,16 @@ This started out as trying to track down why I'm seeing `Closed explicitly` retu
 - Heavy cpu usage
 - Results don't happen on every run
 
+# Running
+
+```
+docker-compose up -d mongo
+
+sleep 10
+
+docker-compose run tests
+```
+
 # Questions
 - How is the best way to handle a flaky connection with the database?
 - Is the above correct in that `Closed explicitly` is coming from a flaky
