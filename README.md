@@ -1,5 +1,10 @@
 This started out as trying to track down why I'm seeing `Closed explicitly` returned from database queries when under load.  I believe this minimal reproduction shows this error as well as either `connection reset` or `read failed`, maybe due to mongo starving.
 
+# Warning
+
+- Heavy cpu usage
+- Results don't happen on every run
+
 # Questions
 - How is the best way to handle a flaky connection with the database?
 - Is the above correct in that `Closed explicitly` is coming from a flaky
