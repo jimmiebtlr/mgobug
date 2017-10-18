@@ -30,6 +30,7 @@ func TestHighVolumeSpec2(t *testing.T) {
 	session.SetMode(mgo.Monotonic, true)
 
 	// Collection(session).RemoveAll(nil)
+
 	fmt.Println("Starting reproduction")
 
 	count := 30000
@@ -39,7 +40,7 @@ func TestHighVolumeSpec2(t *testing.T) {
 	for i := 0; i < count; i++ {
 		index := i
 		go func() {
-			err := UpdateIdentity(session)
+			err := Upsert(session)
 			if err != nil {
 				fmt.Println(err.Error())
 				t.FailNow()
@@ -56,7 +57,7 @@ func TestHighVolumeSpec2(t *testing.T) {
 	wg.Wait()
 }
 
-func UpdateIdentity(session *mgo.Session) (err error) {
+func Upsert(session *mgo.Session) (err error) {
 	s := session.Clone()
 	defer s.Close()
 	c := Collection(s)
